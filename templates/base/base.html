@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} {% endblock %}</title>
+        {% include "base/css.html" %}
+    </head>
+    <body>
+    {% include "base/header.html" %}
+
+    <div style="margin-top:60px;">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include "base/script.html" %}
+    </body>
+</html>
