@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^about$', 'article.views.about'),
     url(r'^bate$', 'article.views.bate'),
     url(r'^article/', include('article.urls')),
+    url(r'^admin/', include('admin.urls')),
 ]

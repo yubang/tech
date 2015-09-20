@@ -1,0 +1,23 @@
+create table if not exists tech_article(
+    id int(11) auto_increment comment '文章id',
+    title varchar(50) not null comment '文章标题',
+    description varchar(150) not null comment '文章描述',
+    pic_url varchar(255) not null comment '文章缩略图',
+    content text not null comment '文章内容',
+    article_type tinyint(1) not null comment '文章类别，0为新技术，1为技术测试',
+    label varchar(30) not null comment '标签，以逗号分割',
+    status tinyint(1) not null comment '0为可见，1为不可见，2为删除',
+    create_time datetime not null comment '文章创建时间',
+    primary key(id)
+)comment="文章表" ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+create table if not exists tech_info(
+    id int(11) auto_increment comment '信息id',
+    name varchar(50) not null comment '信息key',
+    content varchar(200) not null comment '信息value',
+    create_time datetime not null comment '信息创建时间',
+    primary key(id)
+)comment="文章表" ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+insert into tech_info(name,content,create_time) values('admin_username','root',now());
+insert into tech_info(name,content,create_time) values('admin_password',md5('root'),now());

@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+{% block title %}新技术{% endblock %}
+{% block content %}
+
+    <div class="article-div">
+        {% for obj in articles %}
+            <!-- 文章 -->
+            <div class="article-content">
+                <p>
+                    <span class="label label-info">运维</span>
+                </p>
+                <h3>
+                    <a href="/article/a/1">自动化备份工具</a>
+                </h3>
+                <img src="/1.jpg">
+                <div class="article-description">
+                    <small>
+                        这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具
+                        这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具
+                    </small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
