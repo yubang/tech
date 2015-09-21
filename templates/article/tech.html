@@ -7,17 +7,16 @@
             <!-- 文章 -->
             <div class="article-content">
                 <p>
-                    <span class="label label-info">运维</span>
+                    {% for label in obj.label %}
+                        <span class="label label-info">{{label}}</span>
+                    {% endfor %}
                 </p>
                 <h3>
-                    <a href="/article/a/1">自动化备份工具</a>
+                    <a href="/article/a/{{obj.id}}">{{obj.title}}</a>
                 </h3>
-                <img src="/1.jpg">
+                <img src="{{obj.pic_url}}">
                 <div class="article-description">
-                    <small>
-                        这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具
-                        这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具这是一个自动化运维工具
-                    </small>
+                    <small>{{obj.description}}</small>
                 </div>
             </div>
         {% endfor %}

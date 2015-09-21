@@ -3,26 +3,17 @@
 {% block content %}
     <div class="article-content-a">
         <h1>
-            自动化运维
+            {{obj.title}}
         </h1>
         <p>
-            <span class="label label-info">运维</span>
-            <span class="label label-info">研发</span>
+            {% for label in obj.label %}
+                <span class="label label-info">{{label}}</span>
+            {% endfor %}
         </p>
         <p>
-            <small>
-                简介简介简介简介简介简介简介简介简介简介
-                简介简介简介简介简介简介简介简介简介简介
-                简介简介简介简介简介简介简介简介简介简介
-                简介简介简介简介简介简介简介简介简介简介
-                简介简介简介简介简介简介简介简介简介简介
-            </small>
+            <small>{{obj.description}}</small>
         </p>
         <hr>
-        <div>
-            内容内容内容内容内容内容内容内容内容内容
-            内容内容内容内容内容内容内容内容内容内容
-            内容内容内容内容内容内容内容内容内容内容
-        </div>
+        <div>{{obj.content|safe}}</div>
     </div>
 {% endblock %}

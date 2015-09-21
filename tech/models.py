@@ -13,6 +13,7 @@ class ArticleModel(models.Model):
     article_type = models.SmallIntegerField()
     label = models.CharField(max_length=30)
     status = models.SmallIntegerField()
+    pic_url = models.CharField(max_length=255)
     create_time = models.DateTimeField()
 
     class Meta:

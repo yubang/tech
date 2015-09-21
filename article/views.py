@@ -2,7 +2,20 @@
 
 
 from django.shortcuts import render_to_response
+from django.http import HttpResponseNotFound
+from django.core.exceptions import ObjectDoesNotExist
 from tech.models import ArticleModel
+
+
+def get_labels(obj):
+    """
+    获取标签列表
+    :param label: 标签字符串
+    :return: list
+    """
+    if obj:
+        obj.label = obj.label.split(",")
+    return obj
 
 
 def index(request):
@@ -10,7 +23,13 @@ def index(request):
 
 
 def content(request, article_id):
-    return render_to_response("article/a.html",{})
+    try:
+        obj = ArticleModel.objects.get(id=article_id)
+        obj = get_labels(obj)
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound("not found!")
+
+    return render_to_response("article/a.html", {'obj': obj})
 
 
 def about(request):
@@ -22,9 +41,12 @@ def bate(request):
 
 
 def tech(request):
-    articles = ArticleModel.objects.order_by("-create_time").filter(status=0, description=0)
+    articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=0)
+    articles = map(get_labels, articles)
     return render_to_response("article/tech.html", {"articles": articles})
 
 
 def test(request):
-    return render_to_response("article/tech.html", {"articles": range(1, 2)})
+    articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=1)
+    articles = map(get_labels, articles)
+    return render_to_response("article/tech.html", {"articles": articles})

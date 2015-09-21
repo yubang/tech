@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>文章列表</title>
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <h1 align="center">文章列表</h1>
+        <hr>
+
+        {% for obj in articles %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="/admin/article/{{obj.id}}">修改</a>
+                    {% if obj.status == 1 %}
+                        <a href="/admin/article/status/{{obj.id}}/0">启用</a>
+                    {% else %}
+                        <a href="/admin/article/status/{{obj.id}}/1">禁用</a>
+                    {% endif %}
+                    <a href="/admin/article/status/{{obj.id}}/2">删除</a>
+                </div>
+                <div class="panel-body">
+                    {{obj.title}}
+                </div>
+            </div>
+        {% endfor %}
+
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </body>
+</html>
