@@ -2,9 +2,11 @@
 
 
 from django.shortcuts import render_to_response, redirect
-from tech.models import ArticleModel
+from tech.models import ArticleModel, InfoModel
 from glue.plug.ueditor import upload_file
 import datetime
+import hashlib
+import time
 
 
 def article(request, article_id):
@@ -55,4 +57,15 @@ def status(request, article_id, article_status):
 
 
 def account(request):
-    return render_to_response("admin/account.html")
+    if request.method == "GET":
+        return render_to_response("admin/account.html")
+    else:
+
+        user = InfoModel.objects.get(name='admin_username')
+        passwd = InfoModel.objects.get(name='admin_password')
+
+        if request.POST.get('username', None) == user.content and hashlib.md5(request.POST.get('password', None)).\
+                hexdigest() == passwd.content:
+            request.session['admin'] = time.time()
+
+        return redirect("/admin/article/list")
