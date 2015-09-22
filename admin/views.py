@@ -3,13 +3,14 @@
 
 from django.shortcuts import render_to_response, redirect
 from tech.models import ArticleModel
+from glue.plug.ueditor import upload_file
 import datetime
 
 
 def article(request, article_id):
     if request.method == "GET":
         if article_id == '0':
-            obj = {}
+            obj = {'title': '', 'description': '', 'label': '', 'content': '', 'article_type': ''}
         else:
             obj = ArticleModel.objects.get(id=article_id)
         return render_to_response("admin/article.html", {'obj': obj})
@@ -17,18 +18,22 @@ def article(request, article_id):
 
         title = request.POST.get('title', None)
         description = request.POST.get('description', None)
-        # pic_url = request.POST.get('pic_url', None)
         content = request.POST.get('content', None)
         article_type = request.POST.get('article_type', None)
         label = request.POST.get('label', None)
 
+        #使用接口上传
+        data = request.FILES['pic_url'].read()
+        _, pic_url = upload_file(None, data)
+        pic_url = "/pic/" + pic_url
+
         if article_id == '0':
-            article_obj = ArticleModel(title=title, description=description, pic_url='', content=content,
+            article_obj = ArticleModel(title=title, description=description, pic_url=pic_url, content=content,
                                        article_type=article_type, label=label, status=0,
                                        create_time=datetime.datetime.now())
             article_obj.save()
         else:
-            ArticleModel.objects.filter(id=article_id).update(title=title, description=description, pic_url='',
+            ArticleModel.objects.filter(id=article_id).update(title=title, description=description, pic_url=pic_url,
                                                               content=content,article_type=article_type, label=label,
                                                               status=0, create_time=datetime.datetime.now())
         return redirect("/admin/article/list")
@@ -47,3 +52,7 @@ def list(request):
 def status(request, article_id, article_status):
     ArticleModel.objects.filter(id=article_id).update(status=article_status)
     return redirect("/admin/article/list")
+
+
+def account(request):
+    return render_to_response("admin/account.html")

@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^bate$', 'article.views.bate'),
     url(r'^article/', include('article.urls')),
     url(r'^admin/', include('admin.urls')),
+    url(r'^ueditor$', 'glue.plug.ueditor.ueditor_action'),
+    url(r'^pic/(?P<pic_name>.+)$', 'glue.plug.ueditor.show_pic'),
 ]

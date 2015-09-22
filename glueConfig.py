@@ -1,0 +1,7 @@
+# coding:UTF-8
+
+
+QINIU_HOST = ""
+QINIU_KEY = ""
+QINIU_TOKEN = ""
+QINIU_BUCKET = ""
