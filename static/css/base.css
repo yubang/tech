@@ -33,3 +33,39 @@ a{
     padding:5px;
     width:80%;
 }
+
+.about-content-div{
+    text-align:center;
+    width:100%;
+}
+
+.about-content-div .img-div{
+    width:50%;
+    float:left;
+}
+
+.about-content-div .img-div img{
+    width:60%;
+}
+
+.navigation-div{
+    margin-left:10%;
+    margin-top:10px;
+    width:80%;
+}
+
+.navigation-div .navigation-tab{
+    width:30%;
+    float:left;
+    text-align:center;
+}
+
+.navigation-div .navigation-tab li{
+    margin-top:20px;
+    list-style-type:none;
+}
+
+.navigation-div .navigation-content{
+    width:70%;
+    float:right;
+}

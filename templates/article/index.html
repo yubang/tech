@@ -1,5 +1,27 @@
 {% extends "base/base.html"%}
 {% block title %}技术小站{% endblock %}
 {% block content %}
-    <h2 align="center">一个技术小站</h2>
+    <br>
+    <h2 align="center">
+        <input type="search" name="" placeholder="请输入要搜索的关键词">
+        <a href="javascript:alert('暂时还不能搜索！');" class="btn btn-info">搜索</a>
+    </h2>
+    <hr>
+
+    <!--导航框-->
+    <div class="navigation-div">
+        <div class="navigation-tab">
+            <ul>
+                <li><a href="" class="btn btn-info">语言官网</a></li>
+                <li><a href="" class="btn btn-info">开发工具</a></li>
+                <li><a href="" class="btn btn-info">开发社区</a></li>
+                <li><a href="" class="btn btn-info">网站相关</a></li>
+                <li><a href="" class="btn btn-info">在线工具</a></li>
+            </ul>
+        </div>
+        <div class="navigation-content">
+            123
+        </div>
+    </div>
+
 {% endblock %}

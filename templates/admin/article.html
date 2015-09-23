@@ -23,7 +23,12 @@
 
             <textarea id="editor" name="content" placeholder="请输入文章内容">{{obj.content}}</textarea>
 
-            <input type="submit" value="更新">
+            {% if article_id == "0" %}
+                <input type="submit" class="btn btn-info" value="添加">
+            {% else %}
+                <input type="submit" class="btn btn-info" value="更新">
+            {% endif %}
+
         </form>
 
         <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>

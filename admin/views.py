@@ -15,7 +15,7 @@ def article(request, article_id):
             obj = {'title': '', 'description': '', 'label': '', 'content': '', 'article_type': ''}
         else:
             obj = ArticleModel.objects.get(id=article_id)
-        return render_to_response("admin/article.html", {'obj': obj})
+        return render_to_response("admin/article.html", {'obj': obj, 'article_id': article_id})
     else:
 
         title = request.POST.get('title', None)

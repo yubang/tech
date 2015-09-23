@@ -3,6 +3,7 @@
 
 from qiniu import Auth, put_data
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.cache import cache
 import glueConfig as settings
 import re
 import json
@@ -51,7 +52,16 @@ def upload_file(file_name=None, data=None):
 
 def get_download_file_url(file_name):
     """获取文件url"""
+
+    cache_key = '_'.join((settings.CACHE_PREFIX, file_name))
+    private_url = cache.get(cache_key)
+    if private_url:
+        return private_url
+
     q = Auth(settings.QINIU_KEY, settings.QINIU_TOKEN)
     base_url = 'http://%s/%s' % (settings.QINIU_HOST, file_name)
     private_url = q.private_download_url(base_url, expires=3600*24)
+
+    cache.set(cache_key, private_url, 3600*24)
+
     return private_url

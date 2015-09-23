@@ -15,5 +15,16 @@
         </p>
         <hr>
         <div>{{obj.content|safe}}</div>
+
+        <!--高速版-->
+        <div id="SOHUCS" sid="article-{{obj.id}}"></div>
+        <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+        <script type="text/javascript">
+            window.changyan.api.config({
+                appid: 'cys0uEBmD',
+                conf: 'prod_611b64240a901790a8e66f700da24fd2'
+            });
+        </script>
+
     </div>
 {% endblock %}
