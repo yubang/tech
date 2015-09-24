@@ -101,3 +101,13 @@ def test(request):
     articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=1)
     articles = map(get_labels, articles)
     return render_to_response("article/tech.html", {"articles": articles})
+
+
+def data(request):
+    articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=2)
+    articles = map(get_labels, articles)
+    return render_to_response("article/tech.html", {"articles": articles})
+
+
+def baidu(request):
+    return render_to_response("article/baidu.html")

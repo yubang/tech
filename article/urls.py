@@ -9,4 +9,6 @@ urlpatterns = patterns('article.views',
     url(r'^a/(?P<article_id>\d+)', 'content'),
     url(r'^tech$', 'tech'),
     url(r'^test$', 'test'),
+    url(r'^data', 'data'),
+    url(r'^search$', 'baidu'),
 )

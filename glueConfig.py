@@ -5,3 +5,5 @@ QINIU_HOST = ""
 QINIU_KEY = ""
 QINIU_TOKEN = ""
 QINIU_BUCKET = ""
+
+CACHE_PREFIX = "glue"

@@ -3,8 +3,13 @@
 {% block content %}
     <br>
     <h2 align="center">
-        <input type="search" name="" placeholder="请输入要搜索的关键词">
-        <a href="javascript:alert('暂时还不能搜索！');" class="btn btn-info">搜索</a>
+        <input type="search" id="key" name="key" placeholder="请输入要搜索的关键词" onkeypress="if(event.keyCode==13) {searchKey();return false;}">
+        <a href="javascript:searchKey();" class="btn btn-info">搜索</a>
+        <small>
+            <small>
+                <a href="/article/search">（无法搜索？）</a>
+            </small>
+        </small>
     </h2>
     <hr>
 
@@ -35,6 +40,23 @@
     function showNavigationDiv(index){
         $(".navigation-content").hide();
         $("#navigation-content-"+index).show();
+    }
+    function searchKey(){
+        var key = $("#key").val();
+        var arrs = key.split(" ");
+        key = "";
+        for(var i = 0;i<arrs.length; i++){
+            if(key != ""){
+                key += " ";
+            }
+            key = key + encodeURIComponent(arrs[i]);
+        }
+        key = key.replace(/\s/ig,"+");
+        var url = "https://www.google.com.hk/#newwindow=1&safe=strict&q=site:yubangweb.com";
+        if(key != ""){
+           url = url + "+" + key;
+        }
+        window.open(url);
     }
     $(document).ready(function(){
         showNavigationDiv(1);
