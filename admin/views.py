@@ -2,11 +2,15 @@
 
 
 from django.shortcuts import render_to_response, redirect
-from tech.models import ArticleModel, InfoModel
+from tech.models import ArticleModel, InfoModel, ArticleReadNumber
 from glue.plug.ueditor import upload_file
 import datetime
 import hashlib
 import time
+
+
+def index(request):
+    return render_to_response("admin/index.html")
 
 
 def article(request, article_id):
@@ -34,6 +38,9 @@ def article(request, article_id):
                                        article_type=article_type, label=label, status=0,
                                        create_time=datetime.datetime.now())
             article_obj.save()
+
+            read_number_obj = ArticleReadNumber(article_id=article_obj.id, read_number=0)
+            read_number_obj.save()
         else:
             ArticleModel.objects.filter(id=article_id).update(title=title, description=description, pic_url=pic_url,
                                                               content=content,article_type=article_type, label=label,
@@ -69,3 +76,4 @@ def account(request):
             request.session['admin'] = time.time()
 
         return redirect("/admin/article/list")
+

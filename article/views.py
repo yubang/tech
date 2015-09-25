@@ -4,7 +4,8 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
-from tech.models import ArticleModel
+from tech.models import ArticleModel, ArticleReadNumber
+from django.db.models import F
 import json
 
 
@@ -77,6 +78,14 @@ def content(request, article_id):
     try:
         obj = ArticleModel.objects.get(id=article_id)
         obj = get_labels(obj)
+
+        t = ArticleReadNumber.objects.get(article_id=obj.id)
+        t.read_number = F("read_number") + 1
+        t.save()
+        
+        t = ArticleReadNumber.objects.get(article_id=obj.id)
+        obj.read_number = t.read_number
+
     except ObjectDoesNotExist:
         return HttpResponseNotFound("not found!")
 
@@ -94,19 +103,19 @@ def bate(request):
 def tech(request):
     articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=0)
     articles = map(get_labels, articles)
-    return render_to_response("article/tech.html", {"articles": articles})
+    return render_to_response("article/tech.html", {"title": u"新技术", "articles": articles})
 
 
 def test(request):
     articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=1)
     articles = map(get_labels, articles)
-    return render_to_response("article/tech.html", {"articles": articles})
+    return render_to_response("article/tech.html", {"title": u"技术测试", "articles": articles})
 
 
 def data(request):
     articles = ArticleModel.objects.order_by("-create_time").filter(status=0, article_type=2)
     articles = map(get_labels, articles)
-    return render_to_response("article/tech.html", {"articles": articles})
+    return render_to_response("article/tech.html", {"title": u"资料分享", "articles": articles})
 
 
 def baidu(request):

@@ -21,3 +21,13 @@ create table if not exists tech_info(
 
 insert into tech_info(name,content,create_time) values('admin_username','root',now());
 insert into tech_info(name,content,create_time) values('admin_password',md5('root'),now());
+
+
+create table if not exists tech_article_read_number(
+    id int(11) auto_increment,
+    article_id int(11) not null,
+    read_number bigint not null,
+    primary key(id),
+    unique(article_id)
+);
+insert into tech_article_read_number(article_id, read_number) values(6, 0);

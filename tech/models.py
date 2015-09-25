@@ -30,3 +30,14 @@ class InfoModel(models.Model):
 
     class Meta:
         db_table = "tech_info"
+
+
+class ArticleReadNumber(models.Model):
+    """
+    文章阅读数
+    """
+    article_id = models.IntegerField()
+    read_number = models.BigIntegerField()
+
+    class Meta:
+        db_table = "tech_article_read_number"
